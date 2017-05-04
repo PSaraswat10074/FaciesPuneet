@@ -1,12 +1,10 @@
 __all__ = ['filters_bank']
-import numpy as np
-import scipy.fftpack as fft
 from math import *
 
+import numpy as np
 
-def cumulative_filter_banks(n, filt_options):
-    parameter_field = {'filter_type', 'Q', 'B', 'xi_psi', 'sigma_psi', 'phi_bw_multiplier', 'sigma_phi', 'J', 'P',
-                       'spline_order'}
+
+def cumulative_filter_banks1D(n, filt_options):
     filters = {}
     " default parameters"
     "filt_options['filter_type']='morlet_1d'"
