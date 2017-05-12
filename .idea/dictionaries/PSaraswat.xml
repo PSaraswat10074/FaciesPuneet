@@ -7,6 +7,7 @@
       <w>lowpass</w>
       <w>maxfiltabs</w>
       <w>morlet</w>
+      <w>scatteropt</w>
     </words>
   </dictionary>
 </component>

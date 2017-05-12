@@ -1,10 +1,10 @@
 import numpy as np
 from math import *
 
-__all__ = ['cumulative_filter_banks1D']
+__all__ = ['cumulative_filter_banks_1d']
 
 
-def cumulative_filter_banks1D(n, filt_options):
+def cumulative_filter_banks_1d(n, filt_options):
     filters1d = dict()
     " default parameters"
     "filt_options['filter_type']='morlet_1d'"
@@ -143,7 +143,7 @@ def truncate_filter(filter_f, threshold):
     filtered_indices[filtered_indices > N - 1] = N - 1
     filter_f = filter_f[filtered_indices]
     filter['coefft'] = filter_f
-    filter['start'] = ind1 - (N / 2.0 - ind_max)
+    filter['start'] = ind1 - (N / 2.0 - ind_max - 1)
     return filter
 
 
@@ -200,5 +200,5 @@ if __name__ == "__main__":
     current_option['sigma_phi'] = []
     current_option['J'] = [57, 12]
     current_option['P'] = []
-    filters = cumulative_filter_banks1D(65536, current_option)
+    filters = cumulative_filter_banks_1d(65536, current_option)
     print 'done'
