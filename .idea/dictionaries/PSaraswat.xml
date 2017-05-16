@@ -2,12 +2,15 @@
   <dictionary name="PSaraswat">
     <words>
       <w>ampl</w>
+      <w>facies</w>
       <w>filt</w>
       <w>gabor</w>
+      <w>localscatteropt</w>
       <w>lowpass</w>
       <w>maxfiltabs</w>
       <w>morlet</w>
       <w>scatteropt</w>
+      <w>unpad</w>
     </words>
   </dictionary>
 </component>

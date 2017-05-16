@@ -59,14 +59,14 @@ def morlet_filter_bank_1d(n, filter_options):
         filter_options['P'] = round((np.power(2.0, -1.0 / filter_options['Q']) - (0.25 * sigma0) /
                                      filter_options['sigma_phi']) / (1.0 - np.power(2.0, -1.0 / filter_options['Q'])))
     if not 'boundary' in filter_options:
-        filter_options['boundary'] = 'symm'
+        filter_options['boundary'] = 'symmetric'
     if not 'phi_dirac' in filter_options:
         filter_options['phi_dirac'] = 0
 
     filters['meta'] = filter_options
     psi_ampl = 1.0
     sigN = n
-    if filters['meta']['boundary'] == 'symm':
+    if filters['meta']['boundary'] == 'symmetric':
         sigN = 2 * n
     N = np.power(2, ceil(log(sigN, 2)))
     filters['meta']['size_filter'] = N
