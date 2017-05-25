@@ -1,6 +1,10 @@
 from cumulative_filter_banks_1d import *
-from wavelet_transform_1d import*
+from wavelet_transform_1d import *
+from facies_scattering_transform import *
+from transform_utils import *
+import numpy as np
 from matplotlib import *
+
 __all__ = ['factory1d']
 
 
@@ -9,23 +13,22 @@ def factory_generator(n, filter_options, scattering_options):
     if not 'M' in scattering_options:
         scattering_options['M'] = 2
     wavelet_operators = {}
-    for wave_num in range(0, scattering_options['M']+1):
-        wavelet_operators[wave_num]= lambda xbox: wavelet_transform_1d(xbox, filters[wave_num], scattering_options)
+    counter = 0
+    for wave_num_idx in range(0, scattering_options['M'] + 1):
+        wave_num_idx = min(wave_num_idx, len(filters) - 1)
+        wavelet_operators[counter] = wavelet_lambda(filters[wave_num_idx], scattering_options)
+        counter += 1
     return wavelet_operators
 
-if __name__ == "__main__":
-    filt_opt = {}
-    scat_opt = {}
-    scat_opt['M'] =2
-    filt_opt['filter_type'] = 'morlet_1d'
-    filt_opt['Q'] = [8, 1]
-    filt_opt['B'] = []
-    filt_opt['xi_psi'] = []
-    filt_opt['sigma_psi'] = []
-    filt_opt['phi_bw_multiplier'] = []
-    filt_opt['sigma_phi'] = []
-    filt_opt['J'] = [57, 12]
-    filt_opt['P'] = []
 
+def wavelet_lambda(filter_opt, scatter_opt):
+    return lambda x: wavelet_transform_1d(x, filter_opt, scatter_opt)
+
+
+if __name__ == "__main__":
+    averaging_size = 4096
+    filt_opt = default_filter_options('audio', averaging_size)
+    scat_opt = {'M': 2}
     filters = factory_generator(65536, filt_opt, scat_opt)
+    scattered_signal, cov_mod_list = facies_scattering_transform(y, filters)
     print 'done'
